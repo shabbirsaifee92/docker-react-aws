@@ -1,0 +1,12 @@
+language: generic
+sudo: required
+services:
+  - docker
+  
+# Build docker image
+before_install:
+  - docker build -t shabbirsaifee/docker-react-aws -f Dockerfile.dev .
+
+# Run the tests
+script:
+  - docker run -e CI=true shabbirsaifee/docker-react-aws npm run test -- --coverage
